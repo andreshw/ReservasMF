@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ReservasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ReservasModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="ReservasModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Habitaciones" EntityType="ReservasModel.Store.Habitaciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reservas" EntityType="ReservasModel.Store.Reservas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ClienteReserva" Association="ReservasModel.Store.ClienteReserva">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Reserva" EntitySet="Reservas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ciudad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Calificacion" Type="int" Nullable="true" />
+    <Property Name="Reserva_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Habitaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacidad" Type="int" Nullable="false" />
+    <Property Name="NumeroHabitacion" Type="int" Nullable="false" />
+    <Property Name="Disponible" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+    <Property Name="FechaSalida" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="ClienteReserva">
+    <End Role="Cliente" Type="ReservasModel.Store.Clientes" Multiplicity="*" />
+    <End Role="Reserva" Type="ReservasModel.Store.Reservas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reserva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="Reserva_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ReservasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ReservasModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="ReservasModel.Cliente" />
+          <EntitySet Name="Habitaciones" EntityType="ReservasModel.Habitacion" />
+          <EntitySet Name="Reservas" EntityType="ReservasModel.Reserva" />
+          <AssociationSet Name="ClienteReserva" Association="ReservasModel.ClienteReserva">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Reserva" EntitySet="Reservas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Ciudad" Type="String" Nullable="false" />
+          <Property Name="Calificacion" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Reserva" Relationship="ReservasModel.ClienteReserva" FromRole="Cliente" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="Habitacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <Property Name="NumeroHabitacion" Type="Int32" Nullable="false" />
+          <Property Name="Disponible" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="ReservasModel.ClienteReserva" FromRole="Reserva" ToRole="Cliente" />
+        </EntityType>
+        <Association Name="ClienteReserva">
+          <End Type="ReservasModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="ReservasModel.Reserva" Role="Reserva" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReservasModelStoreContainer" CdmEntityContainer="ReservasModelContainer">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(ReservasModel.Cliente)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Habitaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(ReservasModel.Habitacion)">
+        <MappingFragment StoreEntitySet="Habitaciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+          <ScalarProperty Name="NumeroHabitacion" ColumnName="NumeroHabitacion" />
+          <ScalarProperty Name="Disponible" ColumnName="Disponible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservas">
+      <EntityTypeMapping TypeName="IsTypeOf(ReservasModel.Reserva)">
+        <MappingFragment StoreEntitySet="Reservas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClienteReserva" TypeName="ReservasModel.ClienteReserva" StoreEntitySet="Clientes">
+      <EndProperty Name="Reserva">
+        <ScalarProperty Name="Id" ColumnName="Reserva_Id" />
+      </EndProperty>
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

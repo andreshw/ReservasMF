@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ReservasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ReservasModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="ReservasModel.Cliente" />
+    <EntitySet Name="Habitaciones" EntityType="ReservasModel.Habitacion" />
+    <EntitySet Name="Reservas" EntityType="ReservasModel.Reserva" />
+    <AssociationSet Name="ClienteReserva" Association="ReservasModel.ClienteReserva">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Reserva" EntitySet="Reservas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <Property Name="Ciudad" Type="String" Nullable="false" />
+    <Property Name="Calificacion" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Reserva" Relationship="ReservasModel.ClienteReserva" FromRole="Cliente" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Habitacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" />
+    <Property Name="Capacidad" Type="Int32" Nullable="false" />
+    <Property Name="NumeroHabitacion" Type="Int32" Nullable="false" />
+    <Property Name="Disponible" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaIngreso" Type="DateTime" Nullable="false" />
+    <Property Name="FechaSalida" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="ReservasModel.ClienteReserva" FromRole="Reserva" ToRole="Cliente" />
+  </EntityType>
+  <Association Name="ClienteReserva">
+    <End Type="ReservasModel.Cliente" Role="Cliente" Multiplicity="1" />
+    <End Type="ReservasModel.Reserva" Role="Reserva" Multiplicity="1" />
+  </Association>
+</Schema>

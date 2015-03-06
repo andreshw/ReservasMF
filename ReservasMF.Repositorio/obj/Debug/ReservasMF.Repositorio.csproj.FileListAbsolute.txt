@@ -1,0 +1,10 @@
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\ReservasMF.Repositorio.dll.config
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\ReservasMF.Repositorio.dll
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\ReservasMF.Repositorio.pdb
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\EntityFramework.dll
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\EntityFramework.SqlServer.dll
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\EntityFramework.xml
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\bin\Debug\EntityFramework.SqlServer.xml
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\obj\Debug\ReservasMF.Repositorio.csprojResolveAssemblyReference.cache
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\obj\Debug\ReservasMF.Repositorio.dll
+E:\PruebasConcepto\Enfasis2015I\ReservasMF\ReservasMF.Repositorio\obj\Debug\ReservasMF.Repositorio.pdb

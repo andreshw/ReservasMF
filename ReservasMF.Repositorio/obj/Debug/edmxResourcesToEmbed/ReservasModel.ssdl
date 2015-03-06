@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReservasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ReservasModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="ReservasModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Habitaciones" EntityType="ReservasModel.Store.Habitaciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reservas" EntityType="ReservasModel.Store.Reservas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ClienteReserva" Association="ReservasModel.Store.ClienteReserva">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Reserva" EntitySet="Reservas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ciudad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Calificacion" Type="int" Nullable="true" />
+    <Property Name="Reserva_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Habitaciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacidad" Type="int" Nullable="false" />
+    <Property Name="NumeroHabitacion" Type="int" Nullable="false" />
+    <Property Name="Disponible" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+    <Property Name="FechaSalida" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="ClienteReserva">
+    <End Role="Cliente" Type="ReservasModel.Store.Clientes" Multiplicity="*" />
+    <End Role="Reserva" Type="ReservasModel.Store.Reservas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reserva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="Reserva_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
